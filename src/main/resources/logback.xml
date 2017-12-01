@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- configuration file for LogBack (slf4J implementation)
+See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-through-the-java-loggers/ -->
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %r %.-1p %X [%-5.5t] \(%c{0}.java:%L\) - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<if condition='p("spring.profiles.active").equals("dev") || p("spring.profiles.active").equals("test") || isNull("spring.profiles.active")'>
+		<then>
+			<property name="LOG_LEVEL" value="DEBUG" />
+			 <logger name="jdbc.sqlonly" additivity="false">
+		        <level value="INFO" />
+				<appender-ref ref="CONSOLE" />
+			</logger>
+					
+		</then>
+	</if>
+	
+	<if condition='p("spring.profiles.active").equals("oper")'>
+		<then>
+			<property name="LOG_LEVEL" value="ERROR" />
+		</then>
+	</if>
+	
+	<logger name="org.springframework" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+	<logger name="org.apache.ibatis" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+	<logger name="org.mybatis" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+	<logger name="com.base" additivity="false">	
+        <level value="${LOG_LEVEL}" />
+		<appender-ref ref="CONSOLE" />
+	</logger>
+
+</configuration>
