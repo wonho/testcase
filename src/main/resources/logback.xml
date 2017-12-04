@@ -31,18 +31,13 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
 		<appender-ref ref="CONSOLE" />
 	</logger>
 	
-	<logger name="org.apache.ibatis" additivity="false">
-		<level value="DEBUG" />
-		<appender-ref ref="CONSOLE" />
-	</logger>
-	
 	<logger name="org.mybatis" additivity="false">
 		<level value="DEBUG" />
 		<appender-ref ref="CONSOLE" />
 	</logger>
 	
 	<logger name="com.base" additivity="false">	
-        <level value="${LOG_LEVEL}" />
+        <level value="DEBUG" />
 		<appender-ref ref="CONSOLE" />
 	</logger>
 

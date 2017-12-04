@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/auth")
 public class LoginController {
 
 	Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -41,8 +39,8 @@ public class LoginController {
 	}
 
 	
-	@Autowired
-	Melong melong;
+//	@Autowired
+//	Melong melong;
 	
 	@RequestMapping("/main")
 	public String processMain(@RequestParam Map<String,Object> paramMap) throws Exception {
@@ -53,8 +51,8 @@ public class LoginController {
 		String access = (String)paramMap.get("access");
 
 		
-		logger.debug("Auth access {}",melong.getAccess());
-		logger.debug("Auth level {} ",melong.getLevel());
+//		logger.debug("Auth access {}",melong.getAccess());
+//		logger.debug("Auth level {} ",melong.getLevel());
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
@@ -75,10 +73,6 @@ public class LoginController {
 		Object credentials = authentication.getCredentials();
 
 		logger.debug("credentials {} ",credentials);
-		
-		melong.setAccess(access);
-		
-		melong.setLevel(level);
 		
 		return "login/main";
 		

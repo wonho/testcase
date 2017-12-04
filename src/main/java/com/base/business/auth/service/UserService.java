@@ -1,4 +1,4 @@
-package com.base.business.auth;
+package com.base.business.auth.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.base.business.auth.User;
 import com.base.system.dao.CommonDao;
 
 @Service
@@ -26,23 +27,24 @@ public class UserService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+		logger.debug("{}",userName);
 		
-		Object userMap = commonDao.queryForObject("getUser", new HashMap());
+		Object userMap = commonDao.queryForObject("user.select", new HashMap());
+		
+		logger.debug("{}",userName);
 		
 		logger.debug("{}",userMap);
 
 		List<SimpleGrantedAuthority> roleList = new ArrayList<SimpleGrantedAuthority>();
 		
-		ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder();
+		ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder(256);
 		
 		String encodePassword = passwordEncoder.encodePassword("1234", null);
 		
 		roleList.add(new SimpleGrantedAuthority("ROLE_USER"));
 		
-//		UserDetails user = new User("test", "test", roleList);
 		
-		UserDetails user = new User(userName, encodePassword, roleList);
-		
+		UserDetails user = new User("melong", encodePassword, roleList);
 		
 		return user;
 	}

@@ -12,9 +12,7 @@
             You have been logged out.
         </div>
         
-<!--         <form th:action="@{/auth/main.do}" method="post"> -->
-
-        <form action="loginProcess.do"  method="POST">
+        <form action="./loginProcess.do"  method="POST">
             <div><label> User Name : <input type="text" name="username"/> </label></div>
             <div><label> Password: <input type="password" name="password"/> </label></div>
             <div><input type="submit" value="Sign In"/></div>
