@@ -7,7 +7,13 @@
  
     <select id="select" resultType="map">
      <![CDATA[
-        SELECT * FROM tbl_user 
+        SELECT * FROM tbl_user
+     ]]>
+    </select>
+    
+    <select id="select2" resultType="map">
+     <![CDATA[
+        SELECT * FROM tbl_usera asfsadf
      ]]>
     </select>
     

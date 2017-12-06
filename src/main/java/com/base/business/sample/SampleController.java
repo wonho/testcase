@@ -1,6 +1,7 @@
 package com.base.business.sample;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -30,6 +31,9 @@ public class SampleController {
 	public Map<String,Object> getData(@RequestParam Map<String,Object> search) {
 		
 		logger.debug("{}",search);
+		
+		List<?> user = service.getUser();
+		
 
 		Map<String,Object> resultMap = new LinkedHashMap<String, Object>();
 		

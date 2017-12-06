@@ -11,6 +11,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.base.system.security.CustomAuthenticationSuccessHandler;
+import com.base.system.security.LoginSucessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -71,23 +75,43 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //		auth.userDetailsService(new UserService());
 //	}
+
+	@Bean
+	public AuthenticationSuccessHandler getHandler() {
+		AuthenticationSuccessHandler handler = new CustomAuthenticationSuccessHandler();
+		return handler;
+	}
+
+//	@Bean
+//	public AuthenticationSuccessHandler getHandler() {
+//		AuthenticationSuccessHandler handler = new LoginSucessHandler();
+//		return handler;
+//	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+//		AuthenticationSuccessHandler successHandler;
 		http
 		    .authorizeRequests()
-		    .antMatchers("/","/login.jsp").permitAll()
-		    .antMatchers("/main.do").hasRole("USER")
+//		    .antMatchers("/login.do").permitAll()
+		    .antMatchers("/**").hasRole("USER")
 		    .anyRequest().authenticated()
+			.and()
+			.requiresChannel().antMatchers("/login.do","/loginProcess.do").requiresSecure().anyRequest().requiresInsecure()
+//			.and()
+//			.requiresChannel().antMatchers("/**").requiresInsecure()
+			.and()
+			.sessionManagement().sessionFixation().none()
 			.and()
 		    .formLogin()
 		        .loginPage("/login.do")
+		        .permitAll()
 		        .loginProcessingUrl("/loginProcess.do")
 		        .usernameParameter("username")
+		        .successHandler(getHandler())
 		        .passwordParameter("password")
-		        .defaultSuccessUrl("/main.do")
+//		        .defaultSuccessUrl("/main.do")
 		        .failureUrl("/login.do")
-		        .permitAll()
 		        .and()
 		    .logout()
 		        .and()
@@ -97,8 +121,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		/**
 		 * http -> https 포트 매핑
 		 */
-		http.requiresChannel().antMatchers("/login.do","/loginProcess.do","/logout.do").requiresSecure();
-        http.portMapper().http(8080).mapsTo(8443);
-        http.sessionManagement().sessionFixation().none();
+//		http.requiresChannel().antMatchers("/login.do","/loginProcess.do").requiresSecure();
+//		http.requiresChannel().antMatchers("/**/**").requiresInsecure();
+//		http.sessionManagement().sessionFixation().none();
+//        http.portMapper().http(8080).mapsTo(8443);
 	}
 }

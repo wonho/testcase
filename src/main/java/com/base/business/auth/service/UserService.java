@@ -43,7 +43,6 @@ public class UserService implements UserDetailsService{
 		
 		roleList.add(new SimpleGrantedAuthority("ROLE_USER"));
 		
-		
 		UserDetails user = new User("melong", encodePassword, roleList);
 		
 		return user;

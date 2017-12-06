@@ -13,7 +13,7 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
 		<then>
 			<property name="LOG_LEVEL" value="DEBUG" />
 			 <logger name="jdbc.sqlonly" additivity="false">
-		        <level value="INFO" />
+		        <level value="DEBUG" />
 				<appender-ref ref="CONSOLE" />
 			</logger>
 					

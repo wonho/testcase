@@ -15,7 +15,7 @@ public class SampleService {
 	
 	public List<?> getUser() {
 		
-		List<?> userList = dao.queryForList("user.select",  null);
+		List<?> userList = dao.queryForList("user.select2",  null);
 		
 		return userList;
 		
