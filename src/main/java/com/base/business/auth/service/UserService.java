@@ -31,6 +31,10 @@ public class UserService implements UserDetailsService{
 		
 		Object userMap = commonDao.queryForObject("user.select", new HashMap());
 		
+		 if (!userName.equals("melong")) {
+	            throw new UsernameNotFoundException(userName);
+	      }
+		
 		logger.debug("{}",userName);
 		
 		logger.debug("{}",userMap);

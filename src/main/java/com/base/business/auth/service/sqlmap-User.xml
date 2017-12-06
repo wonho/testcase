@@ -13,7 +13,7 @@
     
     <select id="select2" resultType="map">
      <![CDATA[
-        SELECT * FROM tbl_usera asfsadf
+        SELECT * FROM tbl_user
      ]]>
     </select>
     
