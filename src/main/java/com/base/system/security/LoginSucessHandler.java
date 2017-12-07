@@ -12,10 +12,13 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 
 public class LoginSucessHandler extends SavedRequestAwareAuthenticationSuccessHandler  {
 
+	/**
+	 * 
+	 */
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws ServletException, IOException {
-		 Cookie k = new Cookie("JSESSIONID", request.getSession().getId());
+		  Cookie k = new Cookie("JSESSIONID", request.getSession().getId());
 		  k.setPath(request.getContextPath());
 		  response.addCookie(k);
 		  String redirectUrl = request.getContextPath();

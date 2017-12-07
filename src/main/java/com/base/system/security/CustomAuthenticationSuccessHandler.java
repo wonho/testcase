@@ -22,9 +22,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		 String redirectUrl = request.getContextPath();
 	
 		 logger.debug("onAuthenticationSuccess : {}",redirectUrl);
+
+//		 response.sendRedirect(request.getContextPath() + "/loginSuccess?url=" + request.getParameter("url"));
 		 
 		 response.sendRedirect(redirectUrl+"/main.do");
-		  
+		 
 //		AuthenticationEntryPoint
 		
 //	      HttpSession session = httpServletRequest.getSession();
