@@ -33,7 +33,7 @@ public class SocialController {
 
 		String facebookUrl = "https://www.facebook.com/v2.8/dialog/oauth?"+
 						"client_id="+FACEBOOK_CLIENT_ID+
-						"&redirect_uri=https://localhost:8443/restful/facebookAccessToken.do"+
+						"&redirect_uri="+REDIRECT_URL+
 						"&scope=public_profile";
 
 		return "redirect:"+facebookUrl;
