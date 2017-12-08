@@ -94,11 +94,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		    .authorizeRequests()
 //		    .antMatchers("/login.do").permitAll()
+		    .antMatchers("/face*.do").anonymous()
 		    .antMatchers("/**").hasRole("USER")
 		    .anyRequest().authenticated()
 			.and()
 //			.requiresChannel().antMatchers("/login.do","/loginProcess.do").requiresSecure().anyRequest().requiresInsecure()
-			.requiresChannel().antMatchers("/login.do","/loginProcess.do").requiresSecure()
+			.requiresChannel().antMatchers("/login.do","/loginProcess.do","/face*.do").requiresSecure()
 //			.and()
 //			.requiresChannel().antMatchers("/**").requiresInsecure()
 			.and()
